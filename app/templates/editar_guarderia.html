@@ -1,18 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Editar Guardería</title>
-</head>
-<body>
-    <h1>Editar Guardería</h1>
-    <form method="POST" action="/guarderias/editar/{{ guarderia.id }}">
-        <label>Nombre:</label>
-        <input type="text" name="nombre" value="{{ guarderia.nombre }}" required><br>
-        <label>Dirección:</label>
-        <input type="text" name="direccion" value="{{ guarderia.direccion }}" required><br>
-        <label>Teléfono:</label>
-        <input type="text" name="telefono" value="{{ guarderia.telefono }}" required><br>
-        <button type="submit">Guardar</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Editar Guardería{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Editar Guardería</h1>
+<form method="POST" action="{{ url_for('main.editar_guarderia', id=guarderia.id) }}">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" id="nombre" name="nombre" class="form-control" value="{{ guarderia.nombre }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" id="direccion" name="direccion" class="form-control" value="{{ guarderia.direccion }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="text" id="telefono" name="telefono" class="form-control" value="{{ guarderia.telefono }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('main.listar_guarderias') }}" class="btn btn-secondary">Volver a la Lista</a>
+</form>
+{% endblock %}
