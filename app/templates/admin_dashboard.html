@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Administrador{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Panel de Administrador</h1>
+
+<!-- Mostrar mensajes flash -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert alert-{{ messages[0][0] }} mb-4">
+            {% for category, message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div class="list-group">
+    <a href="{{ url_for('main.listar_perros') }}" class="list-group-item list-group-item-action">Gestionar Perros</a>
+    <a href="{{ url_for('main.listar_guarderias') }}" class="list-group-item list-group-item-action">Gestionar Guarderías</a>
+    <a href="{{ url_for('main.listar_cuidadores') }}" class="list-group-item list-group-item-action">Gestionar Cuidadores</a>
+</div>
+
+<!-- Agregar el botón de poblar la base de datos -->
+<a href="{{ url_for('main.populate') }}" class="btn btn-warning mt-3">
+    Poblar Base de Datos
+</a>
+
+<a href="{{ url_for('main.logout') }}" class="btn btn-danger mt-3">Cerrar Sesión</a>
+{% endblock %}

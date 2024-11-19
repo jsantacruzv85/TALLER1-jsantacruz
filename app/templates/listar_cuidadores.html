@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Cuidadores{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Lista de Cuidadores</h1>
+<a href="{{ url_for('main.agregar_cuidador') }}" class="btn btn-success mb-3">Agregar Nuevo Cuidador</a>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Guardería</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cuidador in cuidadores %}
+        <tr>
+            <td>{{ cuidador.id }}</td>
+            <td>{{ cuidador.nombre }}</td>
+            <td>{{ cuidador.telefono }}</td>
+            <td>{{ cuidador.guarderia.nombre if cuidador.guarderia else 'N/A' }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_cuidador', id=cuidador.id) }}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-pencil"></i> Editar
+                </a>
+                <form action="{{ url_for('main.eliminar_cuidador', id=cuidador.id) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary mt-3">Volver</a>
+{% endblock %}

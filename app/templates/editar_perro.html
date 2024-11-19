@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Perro{% endblock %}
+
+{% block content %}
+<h1>Editar Perro</h1>
+<form method="POST" action="{{ url_for('main.editar_perro', id=perro.id) }}">
+    <label>Nombre:</label>
+    <input type="text" name="nombre" value="{{ perro.nombre }}" required><br>
+    <label>Raza:</label>
+    <input type="text" name="raza" value="{{ perro.raza }}" required><br>
+    <label>Edad:</label>
+    <input type="number" name="edad" value="{{ perro.edad }}" required><br>
+    <label>Peso:</label>
+    <input type="number" step="0.01" name="peso" value="{{ perro.peso }}" required><br>
+    <label>Guardería:</label>
+    <select name="id_guarderia" required>
+        {% for guarderia in guarderias %}
+        <option value="{{ guarderia.id }}" {% if guarderia.id == perro.id_guarderia %}selected{% endif %}>{{ guarderia.nombre }}</option>
+        {% endfor %}
+    </select><br>
+    <label>Cuidador:</label>
+    <select name="id_cuidador" required>
+        {% for cuidador in cuidadores %}
+        <option value="{{ cuidador.id }}" {% if cuidador.id == perro.id_cuidador %}selected{% endif %}>{{ cuidador.nombre }}</option>
+        {% endfor %}
+    </select><br>
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}

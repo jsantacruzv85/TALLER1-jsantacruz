@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Panel de Usuario{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Hola, {{ user.username }}</h1>
+<p class="text-center">Bienvenido a tu panel. No tienes acceso a las funciones administrativas.</p>
+<a href="{{ url_for('main.logout') }}" class="btn btn-danger w-100 mt-3">Cerrar Sesión</a>
+{% endblock %}

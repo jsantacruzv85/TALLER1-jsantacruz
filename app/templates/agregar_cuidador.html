@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Cuidador{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Agregar Nuevo Cuidador</h1>
+<form method="POST" action="{{ url_for('main.agregar_cuidador') }}">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" id="nombre" name="nombre" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="text" id="telefono" name="telefono" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="id_guarderia" class="form-label">Guardería</label>
+        <select id="id_guarderia" name="id_guarderia" class="form-select" required>
+            {% for guarderia in guarderias %}
+            <option value="{{ guarderia.id }}">{{ guarderia.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('main.listar_cuidadores') }}" class="btn btn-secondary">Volver a la Lista</a>
+</form>
+{% endblock %}

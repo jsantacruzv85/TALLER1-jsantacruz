@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Guarderías{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Lista de Guarderías</h1>
+<a href="{{ url_for('main.agregar_guarderia') }}" class="btn btn-success mb-3">Agregar Nueva Guardería</a>
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for guarderia in guarderias %}
+        <tr>
+            <td>{{ guarderia.id }}</td>
+            <td>{{ guarderia.nombre }}</td>
+            <td>{{ guarderia.direccion }}</td>
+            <td>{{ guarderia.telefono }}</td>
+            <td>
+                <a href="{{ url_for('main.editar_guarderia', id=guarderia.id) }}" class="btn btn-warning btn-sm">
+                    <i class="bi bi-pencil"></i> Editar
+                </a>
+                <form action="{{ url_for('main.eliminar_guarderia', id=guarderia.id) }}" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Eliminar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('main.dashboard') }}" class="btn btn-secondary mt-3">Volver</a>
+{% endblock %}
